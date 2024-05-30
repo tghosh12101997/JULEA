@@ -68,13 +68,41 @@ Further optimization or allocation of sufficient memory resources could potentia
 
 ## Tail Latency Calculation
 
-One of the challenges encountered during our performance analysis was the difficulty in obtaining individual time elapsed for operations, necessary for calculating tail latency. The storage framework utilized provided only average time measurements, rendering it inadequate for our specific needs.
+One of the challenges encountered during our performance analysis was the difficulty in obtaining individual 
+time elapsed for operations, necessary for calculating tail latency. The storage framework utilized provided 
+only average time measurements, rendering it inadequate for our specific needs.
 
-In an attempt to address this issue, we explored various strategies, including modifying benchmarks to capture individual operation times. However, these attempts proved to be ineffective in providing accurate individual time data.
+In an attempt to address this issue, we explored various strategies, including modifying benchmarks to capture 
+individual operation times. However, these attempts proved to be ineffective in providing accurate individual time data.
 
-For further examination and potential solutions, the code pertaining to the attempted benchmark modifications can be found in the benchmark-change folder.
+For further examination and potential solutions, the code pertaining to the attempted benchmark modifications 
+can be found in the benchmark-change folder. This challenge underscores the importance of selecting appropriate 
+tools and methodologies tailored to the specific requirements of performance analysis, especially when aiming to 
+capture metrics such as tail latency accurately.
 
-This challenge underscores the importance of selecting appropriate tools and methodologies tailored to the specific requirements of performance analysis, especially when aiming to capture metrics such as tail latency accurately.
+## Database Recommendation System
+
+### Objective
+The objective of this recommendation system is to suggest an appropriate database solution based on specified 
+parameters such as the number of files and operation type.
+
+### Implementation
+The recommendation system is implemented using Flask, a Python web framework. The system loads CSV files containing 
+performance data for different database solutions processes the data to calculate throughput and latency, and 
+recommends the optimal database based on these metrics.
+
+### Usage
+To use the recommendation system:
+
+Ensure that Flask is installed (pip install Flask).
+Run the app.py script.
+Access the system through a web browser and input the desired parameters.
+The system will provide a recommendation based on the input.
+Note
+Adjust weights and scoring criteria in the recommendation function (recommend_database) as needed to reflect specific 
+project requirements and priorities this is a part that is yet to be completed as we need input from the throughput 
+and latency to create a metric based on which we will be giving a recommendation.
+
 
 
 
