@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Recommendation System</title>
+</head>
+<body>
+    <h1>Database Recommendation System</h1>
+    <form method="POST">
+        <label for="num_files">Number of Files:</label>
+        <input type="number" id="num_files" name="num_files" required><br><br>
+        
+        <label for="operation_type">Operation Type:</label>
+        <select id="operation_type" name="operation_type" required>
+            <option value="read">Read</option>
+            <option value="write">Write</option>
+            <option value="update">Update</option>
+            <option value="delete">Delete</option>
+        </select><br><br>
+        
+        <input type="submit" value="Get Recommendation">
+    </form>
+
+    {% if recommendation %}
+    <h2>Recommended Database: {{ recommendation }}</h2>
+    {% endif %}
+</body>
+</html>
