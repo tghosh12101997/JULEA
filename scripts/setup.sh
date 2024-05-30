@@ -17,8 +17,6 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#!/bin/bash
-#!/bin/bash
 set -e
 
 SELF_PATH="$(readlink --canonicalize-existing -- "$0")"
@@ -34,8 +32,7 @@ SELF_BASE="${SELF_PATH##*/}"
 
 usage ()
 {
-	echo "Usage: ${SELF_BASE} start|stop|restart [backend]"
-	echo "Backends: sqlite, postgres, redis"
+	echo "Usage: ${SELF_BASE} start|stop|restart"
 	exit 1
 }
 
@@ -67,13 +64,6 @@ setup_slurm ()
 test -n "$1" || usage
 
 MODE="$1"
-BACKEND="$2"
-
-# Set default backend if not provided
-if test -z "${BACKEND}"
-then
-	BACKEND="sqlite"
-fi
 
 #export G_MESSAGES_DEBUG=JULEA
 
@@ -90,47 +80,8 @@ spack_load_dependencies
 
 setup_init
 
-configure_backend() {
-	local backend=$1
-	case "${backend}" in
-		sqlite)
-			julea-config --user \
-				--object-servers="$(hostname)" --kv-servers="$(hostname)" --db-servers="$(hostname)" \
-				--object-backend=posix --object-path="/tmp/julea-$(id -u)/posix" \
-				--kv-backend=lmdb --kv-path="/tmp/julea-$(id -u)/lmdb" \
-				--db-backend=sqlite --db-path="/tmp/julea-$(id -u)/sqlite"
-			;;
-		mysql)
-			julea-config --user \
-				--object-servers="$(hostname)" --kv-servers="$(hostname)" --db-servers="$(hostname)" \
-				--object-backend=posix --object-path="/tmp/julea-$(id -u)/posix" \
-				--kv-backend=lmdb --kv-path="/tmp/julea-$(id -u)/lmdb" \
-				--db-backend=sqlite --db-path="/tmp/julea-$(id -u)/mysql"
-			;;
-		postgres)
-			julea-config --user \
-				--object-servers="$(hostname)" --kv-servers="$(hostname)" --db-servers="$(hostname)" \
-				--object-backend=posix --object-path="/tmp/julea-$(id -u)/posix" \
-				--kv-backend=lmdb --kv-path="/tmp/julea-$(id -u)/lmdb" \
-				--db-backend=postgres --db-path="/tmp/julea-$(id -u)/postgres"
-			;;
-		redis)
-			julea-config --user \
-				--object-servers="$(hostname)" --kv-servers="$(hostname)" --db-servers="$(hostname)" \
-				--object-backend=posix --object-path="/tmp/julea-$(id -u)/posix" \
-				--kv-backend=lmdb --kv-path="/tmp/julea-$(id -u)/lmdb" \
-				--db-backend=redis --db-path="/tmp/julea-$(id -u)/redis"
-			;;
-		*)
-			echo "Unknown backend: $backend"
-			exit 1
-			;;
-	esac
-}
-
 case "${MODE}" in
 	start)
-		configure_backend "${BACKEND}"
 		if ! setup_slurm "${MODE}"
 		then
 			setup_start
@@ -158,7 +109,6 @@ case "${MODE}" in
 		setup_clean
 		;;
 	restart)
-		configure_backend "${BACKEND}"
 		if ! setup_slurm stop
 		then
 			setup_stop
