@@ -1,0 +1,24 @@
+# Dependencies
+dependencies/
+
+# Example
+example/hello-world
+
+# Doxygen
+html/
+
+# Meson
+bld*/
+
+# Patch
+*.orig
+*.rej
+
+# Sublime Text
+*.sublime-*
+
+# Vim
+*.swp
+
+# Visual Studio Code
+.vscode/
