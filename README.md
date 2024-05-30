@@ -4,11 +4,11 @@
 [![Dependencies](https://github.com/parcio/julea/actions/workflows/dependencies.yml/badge.svg)](https://github.com/parcio/julea/actions/workflows/dependencies.yml)
 [![Containers](https://github.com/parcio/julea/actions/workflows/containers.yml/badge.svg)](https://github.com/parcio/julea/actions/workflows/containers.yml)
 
-##Objective
+## Objective
 The objective of this project was to implement a new database solution and assess its performance 
 using tail latency as a key metric.
 
-##Implementation
+## Implementation
 For this task, I have introduced PostgreSQL 10.0 and Redis 5.0 as the new database solutions. 
 These choices were made based on their respective strengths and suitability for our project requirements.
 
@@ -33,7 +33,7 @@ RUN apt update && apt --yes --no-install-recommends install build-essential psmi
 WORKDIR /julea
 ```
 
-###Performance Evaluation
+### Performance Evaluation
 To evaluate the performance of the newly implemented databases, a comparative analysis was conducted with 
 previously utilized solutions, namely SQLite and MySQL. The figures below depict the updated performance comparison:
 
@@ -52,7 +52,7 @@ latency1.png
 These visualizations offer insights into the efficiency and effectiveness of each database solution, 
 aiding in informed decision-making for our project.
 
-###Redis Performance Analysis
+### Redis Performance Analysis
 Upon observation, it is notable that Redis exhibits lower throughput compared to other database solutions. 
 However, the latency associated with Redis is significantly higher. It's important to note that this 
 phenomenon is not indicative of an inherent problem with Redis itself.
